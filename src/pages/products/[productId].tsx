@@ -1,9 +1,11 @@
 import { useRouter } from "next/router";
 import products, { Product } from "../../data/products";
-import React from "react";
+import React, { useContext } from "react";
 import Image from "next/image";
+import { CartContext } from "@/components/CartProvider";
 
 const ProductPage: React.FC = () => {
+  const { cartItems, setCartItems } = useContext(CartContext);
   const router = useRouter();
   const { productId } = router.query;
   const product = products.find(
@@ -13,17 +15,15 @@ const ProductPage: React.FC = () => {
   if (!product) return <p>Product not found</p>;
 
   const handleAddToCart = () => {
-    let cart = JSON.parse(localStorage.getItem("cart") as string) || [];
-    const cartItem = cart.find((item: Product) => item.id === product.id);
+    const cartItem = cartItems.find((item: Product) => item.id === product.id);
 
     if (cartItem) {
       cartItem.quantity += 1;
     } else {
-      cart.push({ ...product, quantity: 1 });
+      cartItems.push({ ...product, quantity: 1 });
     }
 
-    localStorage.setItem("cart", JSON.stringify(cart));
-    alert("Added to cart!");
+    setCartItems([...cartItems]);
   };
 
   return (

@@ -1,5 +1,13 @@
 import Link from "next/link";
+import { useContext } from "react";
+import { CartContext } from "./CartProvider";
 const Header = () => {
+  const { cartItems } = useContext(CartContext);
+
+  const totalPrice = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
   return (
     <nav className="w-full flex justify-between p-4 align-middle">
       <Link href="/" className="flex items-center">
@@ -9,7 +17,7 @@ const Header = () => {
       </Link>
       <Link href="/cart" className="flex">
         <span className="mr-2">🛒</span>
-        <p>$0.00</p>
+        <p>${totalPrice.toFixed(2)}</p>
       </Link>
     </nav>
   );
