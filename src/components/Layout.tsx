@@ -1,11 +1,16 @@
-// components/Layout.js
-
 import Header from "./Header";
 import Footer from "./Footer";
-const Layout = ({ children }: { children: JSX.Element }) => {
+import { CartItem } from "@/pages/cart";
+const Layout = ({
+  children,
+  cartItems,
+}: {
+  children: JSX.Element;
+  cartItems: CartItem[];
+}) => {
   return (
     <div className="min-h-screen flex flex-col justify-between text-center">
-      <Header />
+      <Header cartItems={cartItems} />
       {children}
       <Footer />
     </div>

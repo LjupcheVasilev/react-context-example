@@ -1,19 +1,11 @@
-// pages/cart.tsx
 import { Product } from "@/data/products";
 import { useState, useEffect } from "react";
 
-interface CartItem extends Product {
+export interface CartItem extends Product {
   quantity: number;
 }
 
-const CartPage = () => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
-
-  useEffect(() => {
-    const cart = JSON.parse(localStorage.getItem("cart") as string) || [];
-    setCartItems(cart);
-  }, []);
-
+const CartPage = ({ cartItems }: { cartItems: CartItem[] }) => {
   const handleCheckout = () => {
     // Here you would handle the checkout process
     alert("Checkout not implemented in this example");
