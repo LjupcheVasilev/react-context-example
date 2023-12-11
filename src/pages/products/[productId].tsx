@@ -1,16 +1,11 @@
 import { useRouter } from "next/router";
 import products, { Product } from "../../data/products";
-import React from "react";
+import React, { useContext } from "react";
 import Image from "next/image";
-import { CartItem } from "../cart";
+import { useCartContext } from "@/components/CartProvider";
 
-const ProductPage = ({
-  cartItems,
-  setCartItems,
-}: {
-  cartItems: CartItem[];
-  setCartItems: (items: CartItem[]) => void;
-}) => {
+const ProductPage = () => {
+  const { cartItems, setCartItems } = useCartContext();
   const router = useRouter();
   const { productId } = router.query;
   const product = products.find(
@@ -29,7 +24,6 @@ const ProductPage = ({
     }
 
     setCartItems([...cartItems]);
-    alert("Added to cart!");
   };
 
   return (

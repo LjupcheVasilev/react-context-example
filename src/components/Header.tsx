@@ -1,6 +1,9 @@
 import { CartItem } from "@/pages/cart";
 import Link from "next/link";
-const Header = ({ cartItems }: { cartItems: CartItem[] }) => {
+import { useContext } from "react";
+import { useCartContext } from "./CartProvider";
+const Header = () => {
+  const { cartItems } = useCartContext();
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0

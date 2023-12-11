@@ -1,11 +1,12 @@
+import { useCartContext } from "@/components/CartProvider";
 import { Product } from "@/data/products";
-import { useState, useEffect } from "react";
 
 export interface CartItem extends Product {
   quantity: number;
 }
 
-const CartPage = ({ cartItems }: { cartItems: CartItem[] }) => {
+const CartPage = () => {
+  const { cartItems, setCartItems } = useCartContext();
   const handleCheckout = () => {
     // Here you would handle the checkout process
     alert("Checkout not implemented in this example");
@@ -15,6 +16,11 @@ const CartPage = ({ cartItems }: { cartItems: CartItem[] }) => {
     (total, item) => total + item.price * item.quantity,
     0
   );
+
+  const handleRemove = (id: number) => {
+    const newCartItems = cartItems.filter((item) => item.id !== id);
+    setCartItems([...newCartItems]);
+  };
 
   return (
     <div className="dark:bg-gray-800 dark:text-white">
@@ -32,7 +38,12 @@ const CartPage = ({ cartItems }: { cartItems: CartItem[] }) => {
                 <h2 className="text-xl font-semibold">{item.name}</h2>
                 <p>Quantity: {item.quantity}</p>
               </div>
-              <span className="font-bold">${item.price}</span>
+              <div className="font-bold">
+                <span>${item.price}</span>
+                <button className="ml-2" onClick={() => handleRemove(item.id)}>
+                  Remove
+                </button>
+              </div>
             </div>
           ))}
           <div className="border p-4 mt-4">
