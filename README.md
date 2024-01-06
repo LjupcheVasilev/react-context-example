@@ -1,4 +1,4 @@
-# Project Title
+# React Context Example
 
 This is a simple NextJS project that simulates a store where you can add items to Cart. The repo is an example of how to use React Context and solve a prop drilling issue.
 
