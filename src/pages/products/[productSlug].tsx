@@ -40,7 +40,7 @@ const ProductPage = () => {
       <p className="font-bold mb-4">${product.price}</p>
       <button
         onClick={handleAddToCart}
-        className="bg-blue-500 text-white px-6 py-2 rounded"
+        className="bg-gray-500 text-white px-6 py-2 rounded"
       >
         Add to Cart
       </button>
