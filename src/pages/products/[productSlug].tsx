@@ -7,9 +7,9 @@ import { useCartContext } from "@/components/CartProvider";
 const ProductPage = () => {
   const { cartItems, setCartItems } = useCartContext();
   const router = useRouter();
-  const { productId } = router.query;
+  const { productSlug } = router.query;
   const product = products.find(
-    (p: Product) => p.id === parseInt(productId as string)
+    (p: Product) => p.slug === productSlug
   );
 
   if (!product) return <p>Product not found</p>;

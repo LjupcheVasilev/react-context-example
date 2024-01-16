@@ -1,5 +1,6 @@
 export interface Product {
   id: number;
+  slug: string;
   name: string;
   description: string;
   price: number;
@@ -14,6 +15,7 @@ import product3 from '../../public/images/product3.png'
 const products = [
   {
     id: 1,
+    slug: 'product-1',
     name: "Product 1",
     description: "This is a description for Product 1.",
     price: 10.99,
@@ -21,6 +23,7 @@ const products = [
   },
   {
     id: 2,
+    slug: 'product-2',
     name: "Product 2",
     description: "This is a description for Product 2.",
     price: 19.99,
@@ -28,6 +31,7 @@ const products = [
   },
   {
     id: 3,
+    slug: 'product-3',
     name: "Product 3",
     description: "This is a description for Product 3.",
     price: 29.99,

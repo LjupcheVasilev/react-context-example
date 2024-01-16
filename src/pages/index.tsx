@@ -10,7 +10,7 @@ const HomePage = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {products.map((product: Product) => (
           <Link
-            href={`/products/${product.id}`}
+            href={`/products/${product.slug}`}
             className="hover:decoration:none text-white decoration-none text-left"
             key={product.id}
           >
