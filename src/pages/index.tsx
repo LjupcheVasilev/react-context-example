@@ -24,7 +24,7 @@ const HomePage = () => {
               />
               <h2 className="text-xl font-semibold">{product.name}</h2>
               <p>{product.description}</p>
-              <p className="font-bold">${product.price}</p>
+              <p className="font-bold">£{product.price}</p>
             </div>
           </Link>
         ))}
