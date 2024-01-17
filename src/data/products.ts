@@ -18,7 +18,7 @@ const products = [
     slug: 'product-1',
     name: "Product 1",
     description: "This is a description for Product 1.",
-    price: 10.99,
+    price: 12.99,
     imageUrl: product1,
   },
   {
