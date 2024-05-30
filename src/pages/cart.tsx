@@ -1,26 +1,28 @@
-import { useCartContext } from "@/components/CartProvider";
-import { Product } from "@/data/products";
+import { useCartContext } from "@/components/CartProvider"
+import { Product } from "@/data/products"
 
 export interface CartItem extends Product {
-  quantity: number;
+  quantity: number
 }
 
 const CartPage = () => {
-  const { cartItems, setCartItems } = useCartContext();
+  const {
+    state: { cartItems },
+    dispatch,
+  } = useCartContext()
   const handleCheckout = () => {
     // Here you would handle the checkout process
-    alert("Checkout not implemented in this example");
-  };
+    alert("Checkout not implemented in this example")
+  }
 
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0
-  );
+  )
 
   const handleRemove = (id: number) => {
-    const newCartItems = cartItems.filter((item) => item.id !== id);
-    setCartItems([...newCartItems]);
-  };
+    dispatch({ type: "REMOVE_FROM_CART", payload: id })
+  }
 
   return (
     <div className="dark:bg-gray-800 dark:text-white">
@@ -60,7 +62,7 @@ const CartPage = () => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default CartPage;
+export default CartPage

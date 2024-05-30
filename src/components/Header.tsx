@@ -1,13 +1,13 @@
-import { CartItem } from "@/pages/cart";
-import Link from "next/link";
-import { useContext } from "react";
-import { useCartContext } from "./CartProvider";
+import { CartItem } from "@/pages/cart"
+import Link from "next/link"
+import { useContext } from "react"
+import { useCartContext } from "./CartProvider"
 const Header = () => {
-  const { cartItems } = useCartContext();
-  const totalPrice = cartItems.reduce(
+  const { state } = useCartContext()
+  const totalPrice = state.cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0
-  );
+  )
   return (
     <nav className="w-full flex justify-between p-4 align-middle">
       <Link href="/" className="flex items-center">
@@ -20,7 +20,7 @@ const Header = () => {
         <p>${totalPrice.toFixed(2)}</p>
       </Link>
     </nav>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

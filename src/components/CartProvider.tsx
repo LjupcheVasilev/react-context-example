@@ -1,27 +1,30 @@
-import { CartItem } from "@/pages/cart";
-import { createContext, useContext, useState } from "react";
+import { CartItem } from "@/pages/cart"
+import { createContext, useContext, useReducer, useState } from "react"
 
-const CartContext = createContext<{
-  cartItems: CartItem[];
-  setCartItems: (items: CartItem[]) => void;
-}>({ cartItems: [], setCartItems: () => {} });
+import { cartReducer, initialState } from "@/reducers/cartReducer"
 
-export const useCartContext = () => useContext(CartContext);
+interface CartContextProps {
+  state: {
+    cartItems: CartItem[]
+  }
+  dispatch: React.Dispatch<any>
+}
+
+const CartContext = createContext<CartContextProps>({
+  state: initialState,
+  dispatch: () => null,
+})
+
+export const useCartContext = () => useContext(CartContext)
 
 const CartProvider = ({ children }: { children: JSX.Element }) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [state, dispatch] = useReducer(cartReducer, initialState)
 
-  const handleSetCartItems = (items: CartItem[]) => {
-    // logic
-    setCartItems(items);
-  };
   return (
-    <CartContext.Provider
-      value={{ cartItems, setCartItems: handleSetCartItems }}
-    >
+    <CartContext.Provider value={{ state, dispatch }}>
       {children}
     </CartContext.Provider>
-  );
-};
+  )
+}
 
-export default CartProvider;
+export default CartProvider

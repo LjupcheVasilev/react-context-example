@@ -1,30 +1,22 @@
-import { useRouter } from "next/router";
-import products, { Product } from "../../data/products";
-import React, { useContext } from "react";
-import Image from "next/image";
-import { useCartContext } from "@/components/CartProvider";
+import { useRouter } from "next/router"
+import products, { Product } from "../../data/products"
+import React, { useContext } from "react"
+import Image from "next/image"
+import { useCartContext } from "@/components/CartProvider"
 
 const ProductPage = () => {
-  const { cartItems, setCartItems } = useCartContext();
-  const router = useRouter();
-  const { productId } = router.query;
+  const { dispatch } = useCartContext()
+  const router = useRouter()
+  const { productId } = router.query
   const product = products.find(
     (p: Product) => p.id === parseInt(productId as string)
-  );
+  )
 
-  if (!product) return <p>Product not found</p>;
+  if (!product) return <p>Product not found</p>
 
   const handleAddToCart = () => {
-    const cartItem = cartItems.find((item: Product) => item.id === product.id);
-
-    if (cartItem) {
-      cartItem.quantity += 1;
-    } else {
-      cartItems.push({ ...product, quantity: 1 });
-    }
-
-    setCartItems([...cartItems]);
-  };
+    dispatch({ type: "ADD_TO_CART", payload: product })
+  }
 
   return (
     <div className="dark:bg-gray-800 dark:text-white">
@@ -45,7 +37,7 @@ const ProductPage = () => {
         Add to Cart
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default ProductPage;
+export default ProductPage
