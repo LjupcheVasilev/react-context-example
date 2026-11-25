@@ -19,25 +19,37 @@ const cartReducer = (state: CartState, action: Action): CartState => {
       const existingItem = state.cartItems.find(
         (item) => item.id === action.payload.id
       )
+
+      const cartWithUpdatedItem = state.cartItems.map((item) => {
+        if (item.id === action.payload.id) {
+          return {
+            ...item,
+            quantity: item.quantity + 1,
+          }
+        }
+        return item
+      })
+
       if (existingItem) {
         return {
           ...state,
-          cartItems: state.cartItems.map((item) =>
-            item.id === action.payload.id
-              ? { ...item, quantity: item.quantity + 1 }
-              : item
-          ),
+          cartItems: cartWithUpdatedItem,
         }
       } else {
+        const newItem = { ...action.payload, quantity: 1 }
+        const cartNewItem = [...state.cartItems, newItem]
         return {
           ...state,
-          cartItems: [...state.cartItems, { ...action.payload, quantity: 1 }],
+          cartItems: cartNewItem,
         }
       }
     case "REMOVE_FROM_CART":
+      const cartWithoutItem = state.cartItems.filter(
+        (item) => item.id !== action.payload
+      )
       return {
         ...state,
-        cartItems: state.cartItems.filter((item) => item.id !== action.payload),
+        cartItems: cartWithoutItem,
       }
     case "CLEAR_CART":
       return {
