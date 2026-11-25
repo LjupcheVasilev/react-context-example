@@ -1,13 +1,17 @@
-import Header from "./Header";
-import Footer from "./Footer";
-import { CartItem } from "@/pages/cart";
-const Layout = ({ children }: { children: JSX.Element }) => {
+"use client"
+import Header from "./Header"
+import Footer from "./Footer"
+import { QueryClient, QueryClientProvider } from "react-query"
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  const queryClient = new QueryClient()
   return (
-    <div className="min-h-screen flex flex-col justify-between text-center">
-      <Header />
-      {children}
-      <Footer />
-    </div>
-  );
-};
-export default Layout;
+    <QueryClientProvider client={queryClient}>
+      <div className="min-h-screen flex flex-col justify-between text-center">
+        <Header />
+        {children}
+        <Footer />
+      </div>
+    </QueryClientProvider>
+  )
+}
+export default Layout
